@@ -6,7 +6,7 @@
   <meta name="author" content="">
   <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
-  <title>Dashboard Template for Bootstrap</title>
+  <title>CitySpace</title>
 
   <!-- Bootstrap core CSS -->
   <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
@@ -25,7 +25,28 @@
 </head>
 
 <body>
+  
+  <!-- Facebook SDK Load -->
+  <div id="fb-root"></div>
+     <script>
+       window.fbAsyncInit = function() {
+         FB.init({
+           appId      : 552958418145577,
+           status     : true,
+           xfbml      : true
+         });
+       };
 
+       (function(d, s, id){
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) {return;}
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/all.js";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+     </script>
+     
+     
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -39,6 +60,8 @@
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
+          <li><div class="fb-like" data-send="true" data-width="450" data-show-faces="true"></div>Testing</li>
+          
           <li><a href="#">Dashboard</a></li>
           <li><a href="#">Settings</a></li>
           <li><a href="#">Profile</a></li>
