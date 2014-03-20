@@ -10,8 +10,6 @@ if (Meteor.isClient) {
         console.log("You pressed the button");
     }
   });
-
-  alert("AHHH ERORRO")
   
     window.fbAsyncInit = function() {
       FB.init({
