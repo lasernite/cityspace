@@ -29,6 +29,10 @@
   
   <!-- Facebook SDK Load -->
   <div id="fb-root"></div>
+  
+  <!--
+    Below we include the Login Button social plugin. This button uses the JavaScript SDK to
+    present a graphical Login button that triggers the FB.login() function when clicked. -->
      
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
@@ -44,7 +48,7 @@
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
           <li><div class="fb-like" data-send="true" data-width="450" data-show-faces="true"></div>Testing</li>
-          
+          <li><fb:login-button show-faces="true" width="200" max-rows="1">Login</fb:login-button></li>
           <li><a href="#">Dashboard</a></li>
           <li><a href="#">Settings</a></li>
           <li><a href="#">Profile</a></li>
