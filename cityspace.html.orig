@@ -12,7 +12,7 @@
   <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="cityspace.css" rel="stylesheet">
+  <link href="dashboard.css" rel="stylesheet">
 
   <!-- Just for debugging purposes. Don't actually copy this line! -->
   <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -29,10 +29,6 @@
   
   <!-- Facebook SDK Load -->
   <div id="fb-root"></div>
-  
-  <!--
-    Below we include the Login Button social plugin. This button uses the JavaScript SDK to
-    present a graphical Login button that triggers the FB.login() function when clicked. -->
      
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
@@ -48,7 +44,7 @@
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
           <li><div class="fb-like" data-send="true" data-width="450" data-show-faces="true"></div>Testing</li>
-          <li><fb:login-button show-faces="true" width="200" max-rows="1">Login</fb:login-button></li>
+          
           <li><a href="#">Dashboard</a></li>
           <li><a href="#">Settings</a></li>
           <li><a href="#">Profile</a></li>
@@ -237,34 +233,21 @@
           </table>
         </div>
       </div>
-      <div id="wide_map" class="map">
-		
-	 </div>  
     </div>
-	
   </div>
-  
   <!-- Bootstrap core JavaScript
   ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
   <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
   <script src="../../dist/js/bootstrap.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-  <script>
-  function initMap() {
-    var mapCanvas = document.getElementById('wide_map');
-    var mapOptions = {
-      center: new google.maps.LatLng(44.5403, -78.5463),
-      zoom: 8,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
-    var map = new google.maps.Map(map_canvas, map_options);
-  }
-  google.maps.event.addDomListener(window, 'load', initialize);
-</script>
   <script src="../../assets/js/docs.min.js"></script>
 </body>
 
 <template name="hello">
   {{greeting}}
+<<<<<<< HEAD
+</template>
+</html>
+=======
   </template>
+>>>>>>> parent of d93f558... added proper doctype and html tags, also testing commiting and merge

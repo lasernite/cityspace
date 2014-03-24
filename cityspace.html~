@@ -237,10 +237,11 @@
           </table>
         </div>
       </div>
-      <div id="wide_map" class="map">
-		
-	 </div>  
     </div>
+    
+    <div id="wide_map" class="map">
+		dd		
+	 </div>  
 	
   </div>
   
