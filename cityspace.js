@@ -1,7 +1,7 @@
 // Meteor Client Side
 if (Meteor.isClient) {
   Template.hello.greeting = function () {
-    return "Welcome to cityspace.";
+    return "TheBostonSpace";
   };
 
   Template.hello.events({
@@ -70,6 +70,21 @@ window.fbAsyncInit = function() {
     FB.api('/me', function(response) {
       console.log('Good to see you, ' + response.name + '.');
     });
+
+FB.api(
+	  {
+	    method: 'fql.query',
+	    query: 'SELECT name FROM place WHERE distance(latitude, longitude, "40.768585", "-73.975257") < 50000 LIMIT 500'
+	  },
+	  function(response) {
+		for (var i=0;i<response.length;i++)
+		{
+	     console.log('name is ' + response[i]['name']);
+	  	}
+		console.log('length is ' + response.length);
+	  }
+	);	
+
   }
 
 
@@ -78,4 +93,6 @@ if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
   });
-}}
+}
+
+}
