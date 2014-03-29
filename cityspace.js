@@ -74,16 +74,17 @@ window.fbAsyncInit = function() {
 FB.api(
 	  {
 	    method: 'fql.query',
-	    query: 'SELECT name FROM place WHERE distance(latitude, longitude, "40.768585", "-73.975257") < 50000 LIMIT 500'
+	    query: 'SELECT venue FROM event WHERE name = "Spring Career Fair" AND venue.city = "Cambridge" LIMIT 500'
 	  },
 	  function(response) {
 		for (var i=0;i<response.length;i++)
 		{
-	     console.log('name is ' + response[i]['name']);
+	     console.log('name is ' + response[i].venue.city);
 	  	}
 		console.log('length is ' + response.length);
 	  }
-	);	
+	);
+		
 
   }
 
