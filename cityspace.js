@@ -104,7 +104,7 @@ where     \
                 from \
                     place \
                 where \
-                    distance(latitude, longitude, "42.360608", "-71.084669") < 50000 \
+                    distance(latitude, longitude, "42.359887", "-71.087617") < 5000 \
             ) and \
             start_time > "2014-04-04" \
     ) and \
@@ -115,7 +115,7 @@ where     \
 		{
 	     console.log('name is ' + response[i].name + ' and Venue Location is ' + 
         response[i].venue.latitude + ', ' + response[i].venue.longitude
-        + ' and startime is ' + response[i].start_time );
+        + ' and startime is ' + response[i].start_time + " eventid is " + response[i].eid );
 	  	}
 		console.log('length is ' + response.length);
 	  }
