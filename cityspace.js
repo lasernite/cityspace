@@ -74,12 +74,46 @@ window.fbAsyncInit = function() {
 FB.api(
 	  {
 	    method: 'fql.query',
-	    query: 'SELECT venue FROM event WHERE name = "Spring Career Fair" AND venue.city = "Cambridge" LIMIT 500'
+      query: 'select eid, \
+    name, \
+    description, \
+    location, \
+    all_members_count, \
+    attending_count, \
+    unsure_count, \
+    not_replied_count, \
+    declined_count, \
+    start_time, \
+    end_time,\
+    venue \
+from \
+    event \
+where     \
+    eid in \
+    ( \
+        select \
+            eid, \
+            start_time \
+        from \
+            event_member \
+        where \
+            uid in \
+            ( \
+                select \
+                    page_id \
+                from \
+                    place \
+                where \
+                    distance(latitude, longitude, "42.360608", "-71.084669") < 5000 \
+            ) and \
+            start_time > "2014-01-01" \
+    ) and \
+    end_time < "2015-01-01"  ' 
 	  },
 	  function(response) {
 		for (var i=0;i<response.length;i++)
 		{
-	     console.log('name is ' + response[i].venue.city);
+	     console.log('name is ' + response[i].name + 'Time is ' + response[i].start_time );
 	  	}
 		console.log('length is ' + response.length);
 	  }
