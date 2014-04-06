@@ -104,16 +104,18 @@ where     \
                 from \
                     place \
                 where \
-                    distance(latitude, longitude, "42.360608", "-71.084669") < 5000 \
+                    distance(latitude, longitude, "42.360608", "-71.084669") < 50000 \
             ) and \
-            start_time > "2014-01-01" \
+            start_time > "2014-04-04" \
     ) and \
-    end_time < "2015-01-01"  ' 
+    end_time < "2020-01-01"  ' 
 	  },
 	  function(response) {
 		for (var i=0;i<response.length;i++)
 		{
-	     console.log('name is ' + response[i].name + 'Time is ' + response[i].start_time );
+	     console.log('name is ' + response[i].name + ' and Venue Location is ' + 
+        response[i].venue.latitude + ', ' + response[i].venue.longitude
+        + ' and startime is ' + response[i].start_time );
 	  	}
 		console.log('length is ' + response.length);
 	  }
