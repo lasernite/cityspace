@@ -74,16 +74,17 @@ window.fbAsyncInit = function() {
 // Set up variables for current time/future time for FQL
 
 var time = new Date();
-var fb_time = time.getYear() + 1900 + '-' + (time.getMonth() + 1) + '-' + time.getDate();
+var fb_time = String(time.getYear() + 1900 + '-' + (time.getMonth() + 1) + '-' + time.getDate());
 
 // Consider length of month differences, remember 0 is January, 11 is December, etc.
-if (time.getMonth() in [1,2,4,6,9,11]) {
-  var fb_time_future = time.getYear() + 1900 + '-' + (time.getMonth() + 2) + '-' + time.getDate();
+if (jQuery.inArray(time.getMonth(), [1,2,4,6,9,11]) >= 0 && time.getDate() > 27) {
+  var fb_time_future = String(time.getYear() + 1900 + '-' + (time.getMonth() + 2) + '-' + (time.getDate() - 3));
 }
 else {
-  var fb_time_future = time.getYear() + 1900 + '-' + (time.getMonth() + 2) + '-' + time.getDate();
+  var fb_time_future = String(time.getYear() + 1900 + '-' + (time.getMonth() + 2) + '-' + time.getDate());
 }
-
+console.log(fb_time)
+console.log(fb_time_future)
 
 FB.api(
 	  {
@@ -118,11 +119,10 @@ where     \
                 from \
                     place \
                 where \
-                    distance(latitude, longitude, "42.359887", "-71.087617") < 50000 \
+                    distance(latitude, longitude, "42.344656", "-71.047387") < 1600 \
             ) and \
-            start_time > "2014-4-26" and start_time <"2014-5-31" \
-    ) and \
-    end_time < "2020-01-01"  ' 
+            start_time > "' + fb_time + '" and start_time < "' + fb_time_future + '" \
+    )  and end_time < "2080-1-01" ' 
 	  },
 	  function(response) {
 		for (var i=0;i<response.length;i++)
