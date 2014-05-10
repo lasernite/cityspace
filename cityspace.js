@@ -71,6 +71,20 @@ window.fbAsyncInit = function() {
       console.log('Good to see you, ' + response.name + '.');
     });
 
+// Set up variables for current time/future time for FQL
+
+var time = new Date();
+var fb_time = time.getYear() + 1900 + '-' + (time.getMonth() + 1) + '-' + time.getDate();
+
+// Consider length of month differences, remember 0 is January, 11 is December, etc.
+if (time.getMonth() in [1,2,4,6,9,11]) {
+  var fb_time_future = time.getYear() + 1900 + '-' + (time.getMonth() + 2) + '-' + time.getDate();
+}
+else {
+  var fb_time_future = time.getYear() + 1900 + '-' + (time.getMonth() + 2) + '-' + time.getDate();
+}
+
+
 FB.api(
 	  {
 	    method: 'fql.query',
@@ -104,9 +118,9 @@ where     \
                 from \
                     place \
                 where \
-                    distance(latitude, longitude, "42.359887", "-71.087617") < 5000 \
+                    distance(latitude, longitude, "42.359887", "-71.087617") < 50000 \
             ) and \
-            start_time > "2014-04-04" \
+            start_time > "2014-4-26" and start_time <"2014-5-31" \
     ) and \
     end_time < "2020-01-01"  ' 
 	  },
