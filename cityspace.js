@@ -1,6 +1,5 @@
 // Meteor Client Side
 if (Meteor.isClient) {
-	
   Template.hello.greeting = function () {
     return "TheBostonSpace";
   };
@@ -28,7 +27,7 @@ if (Meteor.isClient) {
 
 window.fbAsyncInit = function() {
   FB.init({
-    appId      : "552958418145577",
+    appId      : 552958418145577,
     status     : true, // check login status
     cookie     : true, // enable cookies to allow the server to access the session
     xfbml      : true  // parse XFBML
@@ -64,6 +63,7 @@ window.fbAsyncInit = function() {
     }
   });
   };
+
   // Load the SDK asynchronously
   (function(d){
    var js, id = 'facebook-jssdk', ref = $('script');
@@ -73,6 +73,7 @@ window.fbAsyncInit = function() {
    js.src = "//connect.facebook.net/en_US/all.js";
    ref.parentNode.insertBefore(js, ref);
   }(document));
+
   // Here we run a very simple test of the Graph API after login is successful. 
   // This testAPI() function is only called in those cases.
   	
@@ -81,45 +82,59 @@ window.fbAsyncInit = function() {
     FB.api('/me', function(response) {
       console.log('Good to see you, ' + response.name + '.');
     });
-		console.log("asdfaasd222");
-		FB.api(
+
+// Set up variables for current time/future time for FQL
+
+var time = new Date();
+var fb_time = String(time.getYear() + 1900 + '-' + (time.getMonth() + 1) + '-' + time.getDate());
+
+// Consider length of month differences, remember 0 is January, 11 is December, etc.
+if (jQuery.inArray(time.getMonth(), [1,2,4,6,9,11]) >= 0 && time.getDate() > 27) {
+  var fb_time_future = String(time.getYear() + 1900 + '-' + (time.getMonth() + 2) + '-' + (time.getDate() - 3));
+}
+else {
+  var fb_time_future = String(time.getYear() + 1900 + '-' + (time.getMonth() + 2) + '-' + time.getDate());
+}
+console.log(fb_time)
+console.log(fb_time_future)
+
+FB.api(
 	  {
 	    method: 'fql.query',
       query: 'select eid, \
-	    name, \
-	    description, \
-	    location, \
-	    all_members_count, \
-	    attending_count, \
-	    unsure_count, \
-	    not_replied_count, \
-	    declined_count, \
-	    start_time, \
-	    end_time,\
-	    venue \
-	from \
-	    event \
-	where     \
-	    eid in \
-	    ( \
-	        select \
-	            eid, \
-	            start_time \
-	        from \
-	            event_member \
-	        where \
-	            uid in \
-	            ( \
-	                select \
-	                    page_id \
-	                from \
-	                    place \
-	                where \
-	                    distance(latitude, longitude, "42.359887", "-71.087617") < 5000 \
-	            ) and \
-	            start_time > "2014-04-04" \
-	    ) and \
-	    end_time < "2020-01-01"  ' 
+    name, \
+    description, \
+    location, \
+    all_members_count, \
+    attending_count, \
+    unsure_count, \
+    not_replied_count, \
+    declined_count, \
+    start_time, \
+    end_time,\
+    venue \
+from \
+    event \
+where     \
+    eid in \
+    ( \
+        select \
+            eid, \
+            start_time \
+        from \
+            event_member \
+        where \
+            uid in \
+            ( \
+                select \
+                    page_id \
+                from \
+                    place \
+                where \
+                    distance(latitude, longitude, "42.344656", "-71.047387") < 1600 \
+            ) and \
+            start_time > "' + fb_time + '" and start_time < "' + fb_time_future + '" \
+    )  and end_time < "2080-1-01" ' 
 	  },
 	  function(response) {
 		for (var i=0;i<response.length;i++)

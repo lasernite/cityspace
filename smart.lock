@@ -4,6 +4,7 @@
     "basePackages": {
       "router": {},
       "bootstrap3-less": {},
+      "jquery-ui": {},
       "jquery-ui-bootstrap": {}
     },
     "packages": {

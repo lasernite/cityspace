@@ -10,3 +10,4 @@ router
 less
 bootstrap3-less
 accounts-facebook
+jquery-ui-bootstrap
