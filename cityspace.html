@@ -108,7 +108,7 @@
           </div>
         </div>
 
-        <h2 class="sub-header">Stream</h2>
+        <h2 class="sub-header">{{>fbevents}}</h2>
         <div class="table-responsive">
           <table class="table table-striped">
             <thead>
@@ -252,6 +252,10 @@
   <script src="../../assets/js/docs.min.js"></script>
 </body>
 
+<template name="fbevents">
+  {{allevents}}
+  </template>
+
 <template name="hello">
-  {{greeting}} 
+  {{greeting}}
   </template>

@@ -1,16 +1,13 @@
 // Meteor Client Side
+
+// global events
+fbeventinfo = [5];
+
 if (Meteor.isClient) {
   Template.hello.greeting = function () {
     return "TheBostonSpace";
   };
 
-  Template.hello.events({
-    'click input' : function () {
-      // template data, if any, is available in 'this'
-      if (typeof console !== 'undefined')
-        console.log("You pressed the button");
-    }
-  });
 
 
 // Facebook Login
@@ -71,8 +68,8 @@ window.fbAsyncInit = function() {
       console.log('Good to see you, ' + response.name + '.');
     });
 
-// Set up variables for current time/future time for FQL
 
+// Set up variables for current time/future time for FQL, Local Event Rendering
 var time = new Date();
 var fb_time = String(time.getYear() + 1900 + '-' + (time.getMonth() + 1) + '-' + time.getDate());
 
@@ -86,6 +83,8 @@ else {
 console.log(fb_time)
 console.log(fb_time_future)
 
+
+// Pull the Local Events (Odd Specific Location/Distance -> Events discrepancy—need multiple calls and add to db)
 FB.api(
 	  {
 	    method: 'fql.query',
@@ -124,20 +123,27 @@ where     \
             start_time > "' + fb_time + '" and start_time < "' + fb_time_future + '" \
     )  and end_time < "2080-1-01" ' 
 	  },
-	  function(response) {
+
+// Events Parsed From Pull
+
+	function(response) {
 		for (var i=0;i<response.length;i++)
 		{
-	     console.log('name is ' + response[i].name + ' and Venue Location is ' + 
+	     fbeventinfo.push(('name is ' + response[i].name + ' and Venue Location is ' + 
         response[i].venue.latitude + ', ' + response[i].venue.longitude
-        + ' and startime is ' + response[i].start_time + " eventid is " + response[i].eid );
+        + ' and startime is ' + response[i].start_time + " eventid is " + response[i].eid ));
 	  	}
-		console.log('length is ' + response.length);
+		fbeventinfo.push('length is ' + response.length);
+    console.log(fbeventinfo)
 	  }
+
 	);
-		
 
   }
 
+  Template.fbevents.allevents = Deps.autorun(function () {
+      Meteor.subscribe("messages", Session.get(fbeventinfo));
+});
 
 // Meteor Server
 if (Meteor.isServer) {
