@@ -1,8 +1,4 @@
 // Meteor Client Side
-
-// global events
-fbeventinfo = [5];
-
 if (Meteor.isClient) {
   Template.hello.greeting = function () {
     return "TheBostonSpace";
@@ -15,19 +11,9 @@ if (Meteor.isClient) {
         console.log("You pressed the button");
     }
   });
-  
-	(function detectBrowser(d) 
-	{
-	  var useragent = navigator.userAgent;
-	  var mapdiv = d.getElementById("small_map");
-	
-	  if (useragent.indexOf('iPhone') != -1 || useragent.indexOf('Android') != -1 ) 
-	  {
-	    $("#small_map").css('width','100%');
-	    $("#small_map").css('height','100%');
-	  }
-	})(document)
-/********Facebook Login**********/
+
+
+// Facebook Login
 
 window.fbAsyncInit = function() {
   FB.init({
@@ -70,10 +56,9 @@ window.fbAsyncInit = function() {
 
   // Load the SDK asynchronously
   (function(d){
-   var js, id = 'facebook-jssdk', ref = $('script');
-   console.log(ref);
-   if ($(id)) {return;}
-   js = $('<script>'); js.id = id; js.async = true;
+   var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+   if (d.getElementById(id)) {return;}
+   js = d.createElement('script'); js.id = id; js.async = true;
    js.src = "//connect.facebook.net/en_US/all.js";
    ref.parentNode.insertBefore(js, ref);
   }(document));
@@ -86,8 +71,8 @@ window.fbAsyncInit = function() {
       console.log('Good to see you, ' + response.name + '.');
     });
 
+// Set up variables for current time/future time for FQL
 
-// Set up variables for current time/future time for FQL, Local Event Rendering
 var time = new Date();
 var fb_time = String(time.getYear() + 1900 + '-' + (time.getMonth() + 1) + '-' + time.getDate());
 
@@ -101,8 +86,6 @@ else {
 console.log(fb_time)
 console.log(fb_time_future)
 
-
-// Pull the Local Events (Odd Specific Location/Distance -> Events discrepancy—need multiple calls and add to db)
 FB.api(
 	  {
 	    method: 'fql.query',
@@ -141,54 +124,19 @@ where     \
             start_time > "' + fb_time + '" and start_time < "' + fb_time_future + '" \
     )  and end_time < "2080-1-01" ' 
 	  },
-
-// Events Parsed From Pull
-
-	function(response) {
+	  function(response) {
 		for (var i=0;i<response.length;i++)
 		{
-	     fbeventinfo.push(('name is ' + response[i].name + ' and Venue Location is ' + 
+	     console.log('name is ' + response[i].name + ' and Venue Location is ' + 
         response[i].venue.latitude + ', ' + response[i].venue.longitude
-        + ' and startime is ' + response[i].start_time + " eventid is " + response[i].eid ));
+        + ' and startime is ' + response[i].start_time + " eventid is " + response[i].eid );
 	  	}
-		fbeventinfo.push('length is ' + response.length);
-    console.log(fbeventinfo)
+		console.log('length is ' + response.length);
 	  }
-	)
-	}
-	/**************Google Maps SDK****************/
-	/*function initialize() 
-	{
-	  var mapOptions = {
-	    zoom: 4,
-	    center: new google.maps.LatLng(-25.363882, 131.044922)
-	  };
-	
-	  var map = new google.maps.Map(document.getElementById('small_map'),
-	      mapOptions);
-	
-	  var marker = new google.maps.Marker({
-	    position: map.getCenter(),
-	    map: map,
-	    title: 'Click to zoom'
-	  });
-	
-	  google.maps.event.addListener(map, 'center_changed', function() {
-	    // 3 seconds after the center of the map has changed, pan back to the
-	    // marker.
-	    window.setTimeout(function() {
-	      map.panTo(marker.getPosition());
-	    }, 3000);
-	  });
-	
-	  google.maps.event.addListener(marker, 'click', function() {
-	    map.setZoom(8);
-	    map.setCenter(marker.getPosition());
-	  });
-	}
-	google.maps.event.addDomListener(window, 'load', initialize);*/
-	console.log("asdfadfafinal");
-}
+	);
+		
+
+  }
 
 
 // Meteor Server
@@ -196,4 +144,6 @@ if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
   });
+}
+
 }

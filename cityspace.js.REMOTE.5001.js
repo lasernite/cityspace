@@ -1,8 +1,4 @@
 // Meteor Client Side
-
-// global events
-fbeventinfo = [5];
-
 if (Meteor.isClient) {
   Template.hello.greeting = function () {
     return "TheBostonSpace";
@@ -79,15 +75,16 @@ window.fbAsyncInit = function() {
   }(document));
 
   // Here we run a very simple test of the Graph API after login is successful. 
-  // This testAPI() function is only called in those cases. 
-  function testAPI() {
+  // This testAPI() function is only called in those cases.
+  	
+		function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
       console.log('Good to see you, ' + response.name + '.');
     });
 
+// Set up variables for current time/future time for FQL
 
-// Set up variables for current time/future time for FQL, Local Event Rendering
 var time = new Date();
 var fb_time = String(time.getYear() + 1900 + '-' + (time.getMonth() + 1) + '-' + time.getDate());
 
@@ -101,8 +98,6 @@ else {
 console.log(fb_time)
 console.log(fb_time_future)
 
-
-// Pull the Local Events (Odd Specific Location/Distance -> Events discrepancy—need multiple calls and add to db)
 FB.api(
 	  {
 	    method: 'fql.query',
@@ -141,18 +136,14 @@ where     \
             start_time > "' + fb_time + '" and start_time < "' + fb_time_future + '" \
     )  and end_time < "2080-1-01" ' 
 	  },
-
-// Events Parsed From Pull
-
-	function(response) {
+	  function(response) {
 		for (var i=0;i<response.length;i++)
 		{
-	     fbeventinfo.push(('name is ' + response[i].name + ' and Venue Location is ' + 
+	     console.log('name is ' + response[i].name + ' and Venue Location is ' + 
         response[i].venue.latitude + ', ' + response[i].venue.longitude
-        + ' and startime is ' + response[i].start_time + " eventid is " + response[i].eid ));
+        + ' and startime is ' + response[i].start_time + " eventid is " + response[i].eid );
 	  	}
-		fbeventinfo.push('length is ' + response.length);
-    console.log(fbeventinfo)
+		console.log('length is ' + response.length);
 	  }
 	)
 	}
