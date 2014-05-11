@@ -8,6 +8,11 @@ if (Meteor.isClient) {
     return "TheBostonSpace";
   };
 
+<<<<<<< HEAD
+
+
+// Facebook Login
+=======
   Template.hello.events({
     'click input' : function () {
       // template data, if any, is available in 'this'
@@ -28,6 +33,7 @@ if (Meteor.isClient) {
 	  }
 	})(document)
 /********Facebook Login**********/
+>>>>>>> fc7f706bd89e5ad095039d94c9376c3b693637b2
 
 window.fbAsyncInit = function() {
   FB.init({
@@ -71,7 +77,7 @@ window.fbAsyncInit = function() {
   // Load the SDK asynchronously
   (function(d){
    var js, id = 'facebook-jssdk', ref = $('script');
-   
+   console.log(ref);
    if ($(id)) {return;}
    js = $('<script>'); js.id = id; js.async = true;
    js.src = "//connect.facebook.net/en_US/all.js";
@@ -79,8 +85,9 @@ window.fbAsyncInit = function() {
   }(document));
 
   // Here we run a very simple test of the Graph API after login is successful. 
-  // This testAPI() function is only called in those cases. 
-  function testAPI() {
+  // This testAPI() function is only called in those cases.
+  	
+		function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
       console.log('Good to see you, ' + response.name + '.');
@@ -154,10 +161,16 @@ where     \
 		fbeventinfo.push('length is ' + response.length);
     console.log(fbeventinfo)
 	  }
+<<<<<<< HEAD
+
+	);
+
+  }
+=======
 	)
 	}
 	/**************Google Maps SDK****************/
-	function initialize() 
+	/*function initialize() 
 	{
 	  var mapOptions = {
 	    zoom: 4,
@@ -186,10 +199,14 @@ where     \
 	    map.setCenter(marker.getPosition());
 	  });
 	}
-	google.maps.event.addDomListener(window, 'load', initialize);
+	google.maps.event.addDomListener(window, 'load', initialize);*/
 	console.log("asdfadfafinal");
 }
+>>>>>>> fc7f706bd89e5ad095039d94c9376c3b693637b2
 
+  Template.fbevents.allevents = Deps.autorun(function () {
+      Meteor.subscribe("messages", Session.get(fbeventinfo));
+});
 
 // Meteor Server
 if (Meteor.isServer) {

@@ -1,10 +1,18 @@
 // Meteor Client Side
+
+// global events
+fbeventinfo = [5];
+
 if (Meteor.isClient) {
-	
   Template.hello.greeting = function () {
     return "TheBostonSpace";
   };
 
+<<<<<<< HEAD
+
+
+// Facebook Login
+=======
   Template.hello.events({
     'click input' : function () {
       // template data, if any, is available in 'this'
@@ -64,6 +72,7 @@ window.fbAsyncInit = function() {
     }
   });
   };
+
   // Load the SDK asynchronously
   (function(d){
    var js, id = 'facebook-jssdk', ref = $('script');
@@ -73,6 +82,7 @@ window.fbAsyncInit = function() {
    js.src = "//connect.facebook.net/en_US/all.js";
    ref.parentNode.insertBefore(js, ref);
   }(document));
+
   // Here we run a very simple test of the Graph API after login is successful. 
   // This testAPI() function is only called in those cases.
   	
@@ -123,8 +133,7 @@ window.fbAsyncInit = function() {
 	    end_time < "2020-01-01"  ' 
 =======
 
-// Set up variables for current time/future time for FQL
-
+// Set up variables for current time/future time for FQL, Local Event Rendering
 var time = new Date();
 var fb_time = String(time.getYear() + 1900 + '-' + (time.getMonth() + 1) + '-' + time.getDate());
 
@@ -138,6 +147,8 @@ else {
 console.log(fb_time)
 console.log(fb_time_future)
 
+
+// Pull the Local Events (Odd Specific Location/Distance -> Events discrepancy—need multiple calls and add to db)
 FB.api(
 	  {
 	    method: 'fql.query',
@@ -175,17 +186,24 @@ where     \
             ) and \
             start_time > "' + fb_time + '" and start_time < "' + fb_time_future + '" \
     )  and end_time < "2080-1-01" ' 
->>>>>>> 9f134c8cfe2836f206f260398b8c2d7647aa02c4
 	  },
-	  function(response) {
+
+// Events Parsed From Pull
+
+	function(response) {
 		for (var i=0;i<response.length;i++)
 		{
-	     console.log('name is ' + response[i].name + ' and Venue Location is ' + 
+	     fbeventinfo.push(('name is ' + response[i].name + ' and Venue Location is ' + 
         response[i].venue.latitude + ', ' + response[i].venue.longitude
-        + ' and startime is ' + response[i].start_time + " eventid is " + response[i].eid );
+        + ' and startime is ' + response[i].start_time + " eventid is " + response[i].eid ));
 	  	}
-		console.log('length is ' + response.length);
+		fbeventinfo.push('length is ' + response.length);
+    console.log(fbeventinfo)
 	  }
+
+	);
+
+  }
 	)
 	}
 	/**************Google Maps SDK****************/
@@ -222,6 +240,9 @@ where     \
 	console.log("asdfadfafinal");
 }
 
+  Template.fbevents.allevents = Deps.autorun(function () {
+      Meteor.subscribe("messages", Session.get(fbeventinfo));
+});
 
 // Meteor Server
 if (Meteor.isServer) {
