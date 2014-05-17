@@ -1,4 +1,8 @@
 // Meteor Client Side
+
+// global events
+fbeventinfo = [5];
+
 if (Meteor.isClient) {
   Template.hello.greeting = function () {
     return "TheBostonSpace";
@@ -25,9 +29,11 @@ if (Meteor.isClient) {
 	})(document)
 /********Facebook Login**********/
 
+// Facebook Login
+
 window.fbAsyncInit = function() {
   FB.init({
-    appId      : 552958418145577,
+    appId      : "552958418145577",
     status     : true, // check login status
     cookie     : true, // enable cookies to allow the server to access the session
     xfbml      : true  // parse XFBML
@@ -66,37 +72,20 @@ window.fbAsyncInit = function() {
 
   // Load the SDK asynchronously
   (function(d){
-   var js, id = 'facebook-jssdk', ref = $('script');
-   
-   if ($(id)) {return;}
-   js = $('<script>'); js.id = id; js.async = true;
+   var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+   if (d.getElementById(id)) {return;}
+   js = d.createElement('script'); js.id = id; js.async = true;
    js.src = "//connect.facebook.net/en_US/all.js";
    ref.parentNode.insertBefore(js, ref);
   }(document));
 
   // Here we run a very simple test of the Graph API after login is successful. 
-  // This testAPI() function is only called in those cases.
-  	
-		function testAPI() {
+  // This testAPI() function is only called in those cases. 
+  function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
       console.log('Good to see you, ' + response.name + '.');
     });
-
-// Set up variables for current time/future time for FQL
-
-var time = new Date();
-var fb_time = String(time.getYear() + 1900 + '-' + (time.getMonth() + 1) + '-' + time.getDate());
-
-// Consider length of month differences, remember 0 is January, 11 is December, etc.
-if (jQuery.inArray(time.getMonth(), [1,2,4,6,9,11]) >= 0 && time.getDate() > 27) {
-  var fb_time_future = String(time.getYear() + 1900 + '-' + (time.getMonth() + 2) + '-' + (time.getDate() - 3));
-}
-else {
-  var fb_time_future = String(time.getYear() + 1900 + '-' + (time.getMonth() + 2) + '-' + time.getDate());
-}
-console.log(fb_time)
-console.log(fb_time_future)
 
 FB.api(
 	  {
@@ -131,30 +120,39 @@ where     \
                 from \
                     place \
                 where \
-                    distance(latitude, longitude, "42.344656", "-71.047387") < 1600 \
+                    distance(latitude, longitude, "42.360608", "-71.084669") < 5000 \
             ) and \
-            start_time > "' + fb_time + '" and start_time < "' + fb_time_future + '" \
-    )  and end_time < "2080-1-01" ' 
+            start_time > "2014-01-01" \
+    ) and \
+    end_time < "2015-01-01"  ' 
 	  },
 	  function(response) {
 		for (var i=0;i<response.length;i++)
 		{
-	     console.log('name is ' + response[i].name + ' and Venue Location is ' + 
-        response[i].venue.latitude + ', ' + response[i].venue.longitude
-        + ' and startime is ' + response[i].start_time + " eventid is " + response[i].eid );
+	     console.log('name is ' + response[i].name + 'Time is ' + response[i].start_time );
 	  	}
 		console.log('length is ' + response.length);
 	  }
-	)
+	);
+	
 	}
 	/**************Google Maps SDK****************/
-	/*function initialize() 
+
+	/*Router.map( function () {
+  this.route('codeEditor',{
+    waitOn: function(){
+        return [IRLibLoader.load('https://some-external.com/javascript.js'), IRLibLoader.load("smthels.js")]
+    }
+  });
+});	*/
+	
+	function initialize() 
 	{
 	  var mapOptions = {
 	    zoom: 4,
 	    center: new google.maps.LatLng(-25.363882, 131.044922)
 	  };
-	
+	/*
 	  var map = new google.maps.Map(document.getElementById('small_map'),
 	      mapOptions);
 	
@@ -175,10 +173,11 @@ where     \
 	  google.maps.event.addListener(marker, 'click', function() {
 	    map.setZoom(8);
 	    map.setCenter(marker.getPosition());
-	  });
+	  });*/
 	}
-	google.maps.event.addDomListener(window, 'load', initialize);*/
-	console.log("asdfadfafinal");
+	//google.maps.event.addDomListener(window, 'load', initialize);
+	//console.log(google)	
+	//console.log("asdfadfafinal");
 }
 
 

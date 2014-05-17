@@ -29,6 +29,7 @@ if (Meteor.isClient) {
 	})(document)
 /********Facebook Login**********/
 
+// Facebook Login
 window.fbAsyncInit = function() {
   FB.init({
     appId      : 552958418145577,
@@ -157,13 +158,22 @@ where     \
 	)
 	}
 	/**************Google Maps SDK****************/
+
+	/*Router.map( function () {
+  this.route('codeEditor',{
+    waitOn: function(){
+        return [IRLibLoader.load('https://some-external.com/javascript.js'), IRLibLoader.load("smthels.js")]
+    }
+  });
+});	*/
+	
 	function initialize() 
 	{
 	  var mapOptions = {
 	    zoom: 4,
 	    center: new google.maps.LatLng(-25.363882, 131.044922)
 	  };
-	
+	/*
 	  var map = new google.maps.Map(document.getElementById('small_map'),
 	      mapOptions);
 	
@@ -184,10 +194,11 @@ where     \
 	  google.maps.event.addListener(marker, 'click', function() {
 	    map.setZoom(8);
 	    map.setCenter(marker.getPosition());
-	  });
+	  });*/
 	}
-	google.maps.event.addDomListener(window, 'load', initialize);
-	console.log("asdfadfafinal");
+	//google.maps.event.addDomListener(window, 'load', initialize);
+	//console.log(google)	
+	//console.log("asdfadfafinal");
 }
 
 
