@@ -1,25 +1,18 @@
 // Meteor Client Side
 
-Cities = new Meteor.Collection("Cities");
+// global events
+fbeventinfo = [5];
 
 if (Meteor.isClient) {
-  if (navigator.geolocation) {
-  	console.log("..");
-  	navigator.geolocation.getCurrentPosition(function (position) {
-  	  var lat = position.coords.latitude;
-  	  var long = position.coords.longitude;
-  	  console.log(position);
-  	  console.log([-long, lat]);
-  	  var city = Cities.find().fetch();
-  	  //var city = Cities.findOne({ geo : { $near : [-long, lat], $maxDistance : 50 } });
-  	  console.log(city);
-  	});
-  }
-  
   Template.hello.greeting = function () {
     return "TheBostonSpace";
   };
 
+<<<<<<< HEAD
+
+
+// Facebook Login
+=======
   Template.hello.events({
     'click input' : function () {
       // template data, if any, is available in 'this'
@@ -27,13 +20,24 @@ if (Meteor.isClient) {
         console.log("You pressed the button");
     }
   });
-
-
-// Facebook Login
+  
+	(function detectBrowser(d) 
+	{
+	  var useragent = navigator.userAgent;
+	  var mapdiv = d.getElementById("small_map");
+	
+	  if (useragent.indexOf('iPhone') != -1 || useragent.indexOf('Android') != -1 ) 
+	  {
+	    $("#small_map").css('width','100%');
+	    $("#small_map").css('height','100%');
+	  }
+	})(document)
+/********Facebook Login**********/
+>>>>>>> fc7f706bd89e5ad095039d94c9376c3b693637b2
 
 window.fbAsyncInit = function() {
   FB.init({
-    appId      : "552958418145577",
+    appId      : 552958418145577,
     status     : true, // check login status
     cookie     : true, // enable cookies to allow the server to access the session
     xfbml      : true  // parse XFBML
@@ -72,35 +76,40 @@ window.fbAsyncInit = function() {
 
   // Load the SDK asynchronously
   (function(d){
-   var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-   if (d.getElementById(id)) {return;}
-   js = d.createElement('script'); js.id = id; js.async = true;
+   var js, id = 'facebook-jssdk', ref = $('script');
+   console.log(ref);
+   if ($(id)) {return;}
+   js = $('<script>'); js.id = id; js.async = true;
    js.src = "//connect.facebook.net/en_US/all.js";
    ref.parentNode.insertBefore(js, ref);
   }(document));
 
   // Here we run a very simple test of the Graph API after login is successful. 
-  // This testAPI() function is only called in those cases. 
-  function testAPI() {
+  // This testAPI() function is only called in those cases.
+  	
+		function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
       console.log('Good to see you, ' + response.name + '.');
     });
 
-// Set up variables for current time/future time for FQL
 
+// Set up variables for current time/future time for FQL, Local Event Rendering
 var time = new Date();
-var fb_time = time.getYear() + 1900 + '-' + (time.getMonth() + 1) + '-' + time.getDate();
+var fb_time = String(time.getYear() + 1900 + '-' + (time.getMonth() + 1) + '-' + time.getDate());
 
 // Consider length of month differences, remember 0 is January, 11 is December, etc.
-if (time.getMonth() in [1,2,4,6,9,11]) {
-  var fb_time_future = time.getYear() + 1900 + '-' + (time.getMonth() + 2) + '-' + time.getDate();
+if (jQuery.inArray(time.getMonth(), [1,2,4,6,9,11]) >= 0 && time.getDate() > 27) {
+  var fb_time_future = String(time.getYear() + 1900 + '-' + (time.getMonth() + 2) + '-' + (time.getDate() - 3));
 }
 else {
-  var fb_time_future = time.getYear() + 1900 + '-' + (time.getMonth() + 2) + '-' + time.getDate();
+  var fb_time_future = String(time.getYear() + 1900 + '-' + (time.getMonth() + 2) + '-' + time.getDate());
 }
+console.log(fb_time)
+console.log(fb_time_future)
 
 
+// Pull the Local Events (Odd Specific Location/Distance -> Events discrepancy—need multiple calls and add to db)
 FB.api(
 	  {
 	    method: 'fql.query',
@@ -134,32 +143,74 @@ where     \
                 from \
                     place \
                 where \
-                    distance(latitude, longitude, "42.359887", "-71.087617") < 50000 \
+                    distance(latitude, longitude, "42.344656", "-71.047387") < 1600 \
             ) and \
-            start_time > "2014-4-26" and start_time <"2014-5-31" \
-    ) and \
-    end_time < "2020-01-01"  ' 
+            start_time > "' + fb_time + '" and start_time < "' + fb_time_future + '" \
+    )  and end_time < "2080-1-01" ' 
 	  },
-	  function(response) {
+
+// Events Parsed From Pull
+
+	function(response) {
 		for (var i=0;i<response.length;i++)
 		{
-	     console.log('name is ' + response[i].name + ' and Venue Location is ' + 
+	     fbeventinfo.push(('name is ' + response[i].name + ' and Venue Location is ' + 
         response[i].venue.latitude + ', ' + response[i].venue.longitude
-        + ' and startime is ' + response[i].start_time + " eventid is " + response[i].eid );
+        + ' and startime is ' + response[i].start_time + " eventid is " + response[i].eid ));
 	  	}
-		console.log('length is ' + response.length);
+		fbeventinfo.push('length is ' + response.length);
+    console.log(fbeventinfo)
 	  }
+<<<<<<< HEAD
+
 	);
-		
 
   }
+=======
+	)
+	}
+	/**************Google Maps SDK****************/
+	/*function initialize() 
+	{
+	  var mapOptions = {
+	    zoom: 4,
+	    center: new google.maps.LatLng(-25.363882, 131.044922)
+	  };
+	
+	  var map = new google.maps.Map(document.getElementById('small_map'),
+	      mapOptions);
+	
+	  var marker = new google.maps.Marker({
+	    position: map.getCenter(),
+	    map: map,
+	    title: 'Click to zoom'
+	  });
+	
+	  google.maps.event.addListener(map, 'center_changed', function() {
+	    // 3 seconds after the center of the map has changed, pan back to the
+	    // marker.
+	    window.setTimeout(function() {
+	      map.panTo(marker.getPosition());
+	    }, 3000);
+	  });
+	
+	  google.maps.event.addListener(marker, 'click', function() {
+	    map.setZoom(8);
+	    map.setCenter(marker.getPosition());
+	  });
+	}
+	google.maps.event.addDomListener(window, 'load', initialize);*/
+	console.log("asdfadfafinal");
+}
+>>>>>>> fc7f706bd89e5ad095039d94c9376c3b693637b2
 
+  Template.fbevents.allevents = Deps.autorun(function () {
+      Meteor.subscribe("messages", Session.get(fbeventinfo));
+});
 
 // Meteor Server
 if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
   });
-}
-
 }

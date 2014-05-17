@@ -1,0 +1,11 @@
+{
+  "packages": {
+    "router": {},
+    "bootstrap3-less": {},
+<<<<<<< HEAD
+=======
+    "jquery-ui": {},
+>>>>>>> 9f134c8cfe2836f206f260398b8c2d7647aa02c4
+    "jquery-ui-bootstrap": {}
+  }
+}

@@ -1,28 +1,7 @@
 // Meteor Client Side
-
-Cities = new Meteor.Collection("Cities");
-// global events
-fbeventinfo = [5];
-
 if (Meteor.isClient) {
-  Session.setDefault("city", "");
-  if (navigator.geolocation) {
-  	console.log("..");
-  	navigator.geolocation.getCurrentPosition(function (position) {
-  	  var lat = position.coords.latitude;
-  	  var long = position.coords.longitude;
-  	  console.log(position);
-  	  console.log([-long, lat]);
-  	  //var city = Cities.find().fetch();
-  	  var city = Cities.findOne({ geo : { $near : [-long, lat], $maxDistance : 50 } });
-  	  console.log(city);
-  	  Session.set("city", city.name);
-  	});
-  }
-  
   Template.hello.greeting = function () {
-  	var city = Session.get("city");
-    return "The" + city + "Space";
+    return "TheBostonSpace";
   };
 
   Template.hello.events({
@@ -88,7 +67,7 @@ window.fbAsyncInit = function() {
   // Load the SDK asynchronously
   (function(d){
    var js, id = 'facebook-jssdk', ref = $('script');
-   
+   console.log(ref);
    if ($(id)) {return;}
    js = $('<script>'); js.id = id; js.async = true;
    js.src = "//connect.facebook.net/en_US/all.js";
@@ -96,15 +75,16 @@ window.fbAsyncInit = function() {
   }(document));
 
   // Here we run a very simple test of the Graph API after login is successful. 
-  // This testAPI() function is only called in those cases. 
-  function testAPI() {
+  // This testAPI() function is only called in those cases.
+  	
+		function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
       console.log('Good to see you, ' + response.name + '.');
     });
 
+// Set up variables for current time/future time for FQL
 
-// Set up variables for current time/future time for FQL, Local Event Rendering
 var time = new Date();
 var fb_time = String(time.getYear() + 1900 + '-' + (time.getMonth() + 1) + '-' + time.getDate());
 
@@ -118,8 +98,6 @@ else {
 console.log(fb_time)
 console.log(fb_time_future)
 
-
-// Pull the Local Events (Odd Specific Location/Distance -> Events discrepancy—need multiple calls and add to db)
 FB.api(
 	  {
 	    method: 'fql.query',
@@ -158,23 +136,19 @@ where     \
             start_time > "' + fb_time + '" and start_time < "' + fb_time_future + '" \
     )  and end_time < "2080-1-01" ' 
 	  },
-
-// Events Parsed From Pull
-
-	function(response) {
+	  function(response) {
 		for (var i=0;i<response.length;i++)
 		{
-	     fbeventinfo.push(('name is ' + response[i].name + ' and Venue Location is ' + 
+	     console.log('name is ' + response[i].name + ' and Venue Location is ' + 
         response[i].venue.latitude + ', ' + response[i].venue.longitude
-        + ' and startime is ' + response[i].start_time + " eventid is " + response[i].eid ));
+        + ' and startime is ' + response[i].start_time + " eventid is " + response[i].eid );
 	  	}
-		fbeventinfo.push('length is ' + response.length);
-    console.log(fbeventinfo)
+		console.log('length is ' + response.length);
 	  }
 	)
 	}
 	/**************Google Maps SDK****************/
-	function initialize() 
+	/*function initialize() 
 	{
 	  var mapOptions = {
 	    zoom: 4,
@@ -203,7 +177,7 @@ where     \
 	    map.setCenter(marker.getPosition());
 	  });
 	}
-	google.maps.event.addDomListener(window, 'load', initialize);
+	google.maps.event.addDomListener(window, 'load', initialize);*/
 	console.log("asdfadfafinal");
 }
 

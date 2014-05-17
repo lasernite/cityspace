@@ -4,7 +4,10 @@
     "basePackages": {
       "router": {},
       "bootstrap3-less": {},
+<<<<<<< HEAD
+=======
       "jquery-ui": {},
+>>>>>>> 9f134c8cfe2836f206f260398b8c2d7647aa02c4
       "jquery-ui-bootstrap": {}
     },
     "packages": {
@@ -18,6 +21,14 @@
         "tag": "v0.1.9",
         "commit": "5c812c4d7ce72917a065f0424c3cf54e5ff2d16a"
       },
+<<<<<<< HEAD
+=======
+      "jquery-ui": {
+        "git": "https://github.com/TimHeckel/meteor-jquery-ui.git",
+        "tag": "v1.9.2",
+        "commit": "c437d45edcf1367df8d5ffa8bad2867758030bd2"
+      },
+>>>>>>> 9f134c8cfe2836f206f260398b8c2d7647aa02c4
       "jquery-ui-bootstrap": {
         "git": "https://github.com/TimHeckel/meteor-jquery-ui-bootstrap.git",
         "tag": "v0.1.2",
