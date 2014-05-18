@@ -19,7 +19,7 @@ window.fbAsyncInit = function() {
       // The response object is returned with a status field that lets the app know the current
       // login status of the person. In this case, we're handling the situation where they 
       // have logged in to the app.
-      testAPI();
+      onLoad();
     } else if (response.status === 'not_authorized') {
       // In this case, the person is logged into Facebook, but not into the app, so we call
       // FB.login() to prompt them to do so. 
@@ -51,7 +51,7 @@ window.fbAsyncInit = function() {
 
   // Here we run a very simple test of the Graph API after login is successful. 
   // This testAPI() function is only called in those cases. 
-  function testAPI() {
+  function onLoad() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
       console.log('Good to see you, ' + response.name + '.');
@@ -115,16 +115,32 @@ where     \
 
 // Events Parsed From Pull
 
-	function(response) {
-		for (var i=0;i<response.length;i++)
-		{
-	     fbeventinfo.push(('name is ' + response[i].name + ' and Venue Location is ' + 
-        response[i].venue.latitude + ', ' + response[i].venue.longitude
-        + ' and startime is ' + response[i].start_time + " eventid is " + response[i].eid ));
-	  	}
-		fbeventinfo.push('length is ' + response.length);
-    console.log(fbeventinfo)
-	  }
-	)
-	}
+		function(response) {
+			fbEvents = []
+			for (var i=0;i<response.length;i++)
+			{
+	     	fbeventinfo.push(('name is ' + response[i].name + ' and Venue Location is ' + 
+        	response[i].venue.latitude + ', ' + response[i].venue.longitude
+        	+ ' and startime is ' + response[i].start_time + " eventid is " + response[i].eid ));
+	  		}
+			fbeventinfo.push('length is ' + response.length);
+    		console.log(fbeventinfo)
+    		Session.set("fbEventData",response)
+    		
+    		var mytable = "<tbody>";
+
+			for (var i in Session.get("fbEventData")) {
+				mytable += "<tr>";
+		    	mytable += "<td>" + response[i].name + "</td>";
+		    	mytable += "<td>" + response[i].venue.latitude + "</td>";
+				mytable += "<td>" + response[i].venue.longitude + "</td>";
+				mytable += "<td>" + response[i].start_time + "</td>";
+		    	mytable += "</tr>";
+			}
+		
+			mytable += "</tbody>";
+		
+			$("#streamDataTable").append(mytable);
+		}
+	)}
 }

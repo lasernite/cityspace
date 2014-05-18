@@ -6,12 +6,21 @@
 	width: 20%
 }
 
-#small_map {
+#detailDisplay {
 	display: inline;
 	float: left;
 	width: 20%;
 	height: 500px;	
 	background-color:#4ff;
+}
+
+#small_map {
+	height: 70%;
+}
+
+#nodeData {
+	height: 30%;	
+	background-color:#f22;
 }
 
 #streamData {
