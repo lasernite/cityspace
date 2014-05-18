@@ -31,3 +31,14 @@
 	position: relative;
 	width: 60%
 }
+
+
+/* SideBar Styling */
+
+.sidebarFont {
+	font-size: 200%;
+}
+
+#sidebarTop {
+	margin-top:40px;
+}
