@@ -1,16 +1,42 @@
 /* CSS declarations go here */
+
+/*Top and left nav-bars*/
 #nav-sidebar {
 	float: left;
 	position: fixed;
-	top: 0
-	width: 20%
+	font-size: 200%;
 }
 
+@media screen {
 #nav-topbar {
 	position: static;
+	font-size: 170%;
+	margin-top:40px;
+	font-weight:bold;
+	font-style:italic;
+}
 }
 
+@media handheld {
+#nav-topbar {
+	position: static;
+	font-size: 100%;
+	margin-top:40px;
+	font-weight:bold;
+	font-style:italic;
+}
+}
+
+#nav-sidebarTop {
+	font-size: 170%;
+	margin-top:40px;
+	font-weight:bold;
+	font-style:italic;
+}
+
+/* Data Stream Dependent*/
 #detailDisplay {
+	position: fixed;
 	display: inline;
 	float: left;
 	width: 20%;
@@ -19,6 +45,7 @@
 }
 
 #small_map {
+	position: fixed;
 	height: 70%;
 }
 
@@ -34,22 +61,4 @@
 	margin-left: 20%;
 	position: relative;
 	width: 60%
-}
-
-
-/* SideBar Styling */
-
-.sidebarFont {
-	font-size: 200%;
-}
-
-#sidebarTop {
-	font-size: 170%;
-	margin-top:40px;
-	font-weight:bold;
-	font-style:italic;
-}
-
-.sidebarMain {
-	margin-left:30px;
 }
