@@ -38,7 +38,7 @@ if (Meteor.isClient) {
   	});
   }
   
-  Template.hello.greeting = function () {
+  Template.cities.name = function () {
   	var city = Session.get("city");
     return "The" + city + "Space";
   };

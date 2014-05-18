@@ -3,7 +3,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
-  <meta name="author" content="Nchinda Nchinda" >
+  <meta name="author" content="Nchinda, Laser, Siddharth Trehan, Nite, Nchinda" >
   <meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
   <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
@@ -31,7 +31,7 @@
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
           <span class="sr-only">Toggle navigation</span>
         </button>
-        <a class="navbar-brand" href="#">{{>hello}}</a>
+        <a class="navbar-brand" href="#">{{>cities}}</a>
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
@@ -54,21 +54,12 @@
 
   <main class="container-fluid">
 		<div id="nav-sidebar" class="col-sm-3 col-md-2">
-        <ul class="nav nav-sidebar">
-          <li class="active"><a href="#">Stream</a></li>
-          <li><a href="#">Events</a></li>
-          <li><a href="#">Groups</a></li>
-          <li><a href="#">News</a></li>
-        </ul>
-        <ul class="nav nav-sidebar">
-          <li><a href="">Trending Tags #</a></li>
-          <li><a href="">daftpunk miley_cyrus</a></li>
-          <li><a href="">superbowl elder eat </a></li>
-        </ul>
-        <ul class="nav nav-sidebar">
-          <li><a href="">lopem ipusum ogvon</a></li>
-          <li><a href="">newton adhelion</a></li>
-          <li><a href="">item tomonf foded</a></li>
+        <ul class="nav nav-sidebar sidebarFont">
+          <li id="sidebarTop"><a href="#">Stream</a></li>
+          <li><a href="#"><div class="sidebarMain">Events</div></a></li>
+          <li><a href="#"><div class="sidebarMain">Groups</div></a></li>
+          <li><a href="#"><div class="sidebarMain">News</div></a></li>
+          <li><a href="#"><div class="sidebarMain">Talk</div></a></li>
         </ul>
       </div>
       
@@ -109,8 +100,8 @@
   {{allevents}}
   </template>
 
-<template name="hello">
-  {{greeting}} 
+<template name="cities">
+  {{name}} 
   </template>
 
 <template name="eventData">
