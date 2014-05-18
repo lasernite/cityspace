@@ -30,7 +30,7 @@ run = do
 
 clearCities = delete (select [] "Cities")
 
-insertCities = insertMany "Cities" . map (\(City lat long name state) -> ["latitude" =: lat, "longitude" =: long, "name" =: name, "state" =: state])
+insertCities = insertMany "Cities" . map (\(City lat long name state) -> ["geo" =: [long, lat], "name" =: name, "state" =: state])
 
 parseZips :: IO [City]
 parseZips = do
