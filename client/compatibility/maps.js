@@ -1,12 +1,21 @@
-/*
-	// Google Maps SDK
-	function initialize() 
+function load_maps() 
+{ 
+	/**************Google Maps SDK****************/
+	function GMapInitialize() 
 	{
-	  var mapOptions = {
-	    zoom: 4,
-	    center: new google.maps.LatLng(-25.363882, 131.044922)
-	  };
-	
+		if (navigator.geolocation) {
+  			var mapOptions = {
+	    		zoom: 4,
+	    		center: new google.maps.LatLng(Session.get("latitude"),Session.get("longitude"))
+	  		};
+		}
+		else {
+			var mapOptions = {
+	    		zoom: 4,
+	    		center: new google.maps.LatLng(-25.363882, 131.044922)
+		  	};
+		}			
+		
 	  var map = new google.maps.Map(document.getElementById('small_map'),
 	      mapOptions);
 	
@@ -29,11 +38,18 @@
 	    map.setCenter(marker.getPosition());
 	  });
 	}
-	google.maps.event.addDomListener(window, 'load', initialize);
-	console.log("asdfadfafinal");
-
-  Template.fbevents.allevents = Deps.autorun(function () {
-      Meteor.subscribe("messages", Session.get(fbeventinfo));
-});
-*/
-
+	function addLoadEvent(func) {
+		var oldonload = window.onload;
+		if (typeof window.onload != 'function') {
+			window.onload = func;
+		} else {
+			window.onload = function() {
+		    	if (oldonload) {
+		    		oldonload();
+		    	}
+		    	func();
+			}
+		}
+	}
+	addLoadEvent(GMapInitialize)
+}
