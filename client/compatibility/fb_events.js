@@ -19,7 +19,7 @@ window.fbAsyncInit = function() {
       // The response object is returned with a status field that lets the app know the current
       // login status of the person. In this case, we're handling the situation where they 
       // have logged in to the app.
-      testAPI();
+      on_load();
     } else if (response.status === 'not_authorized') {
       // In this case, the person is logged into Facebook, but not into the app, so we call
       // FB.login() to prompt them to do so. 
@@ -51,10 +51,9 @@ window.fbAsyncInit = function() {
 
   // Here we run a very simple test of the Graph API after login is successful. 
   // This testAPI() function is only called in those cases. 
-  function testAPI() {
+  function on_load() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
-      console.log('Good to see you, ' + response.name + '.');
     });
 
 
@@ -107,7 +106,7 @@ where     \
                 from \
                     place \
                 where \
-                    distance(latitude, longitude, "42.344656", "-71.047387") < 1600 \
+                    distance(latitude, longitude, "42.373799", "-71.117070") < 1500 \
             ) and \
             start_time > "' + fb_time + '" and start_time < "' + fb_time_future + '" \
     )  and end_time < "2080-1-01" ' 
@@ -126,5 +125,5 @@ where     \
     console.log(fbeventinfo)
 	  }
 	)
-	}
+  }
 }
