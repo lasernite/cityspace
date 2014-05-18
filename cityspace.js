@@ -18,19 +18,19 @@ if (Meteor.isClient) {
 		}
 	})(document)
 			
-  Session.setDefault("city", "");
-  Session.setDefault("latitude", 43.600035);
-  Session.setDefault("longitude", 1.437836);
-  Session.set("fbeventData",[])
-  if (navigator.geolocation) {
+	Session.setDefault("city", "");
+  	Session.setDefault("latitude", 43.600035);
+  	Session.setDefault("longitude", 1.437836);
+  	Session.setDefault("fbEventData",[])
+  	Session.setDefault("map","noMap");
+  	
+  	if (navigator.geolocation) {
   	console.log("..");
   	navigator.geolocation.getCurrentPosition(function (position) {
   	  var lat = position.coords.latitude;
   	  var long = position.coords.longitude;
         Session.set("latitude", lat);
   		Session.set("longitude", long);
-  	  console.log(position);
-  	  console.log([-long, lat]);
   	  //var city = Cities.find().fetch();
   	  var city = Cities.findOne({ geo : { $near : [-long, lat], $maxDistance : 50 } });
   	  console.log(city);
@@ -42,6 +42,15 @@ if (Meteor.isClient) {
   	var city = Session.get("city");
     return "The" + city + "Space";
   };
+  
+  Template.eventData.eventData = function () {
+  	var fbEventData = Session.get("fbEventData");
+  	console.log(fbEventData);
+  	
+	updateMap(fbEventData); 
+	
+	return fbEventData;
+  }
 
   // Load Facebook API with Events
   	load_facebook();

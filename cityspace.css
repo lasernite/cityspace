@@ -6,6 +6,10 @@
 	width: 20%
 }
 
+#nav-topbar {
+	position: static;
+}
+
 #detailDisplay {
 	display: inline;
 	float: left;

@@ -124,10 +124,10 @@ where     \
         	+ ' and startime is ' + response[i].start_time + " eventid is " + response[i].eid ));
 	  		}
 			fbeventinfo.push('length is ' + response.length);
-    		console.log(fbeventinfo)
+    		console.log(response);
     		Session.set("fbEventData",response)
     		
-    		var mytable = "<tbody>";
+    		/*var mytable = "<tbody>";
 
 			for (var i in Session.get("fbEventData")) {
 				mytable += "<tr>";
@@ -140,7 +140,7 @@ where     \
 		
 			mytable += "</tbody>";
 		
-			$("#streamDataTable").append(mytable);
+			$("#streamDataTable").append(mytable);*/
 		}
 	)}
 }

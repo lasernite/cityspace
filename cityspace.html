@@ -25,7 +25,7 @@
   <div id="fb-root"></div>
   
      
-  <div class="navbar-inverse navbar-fixed-top" role="navigation">
+  <div id="nav-topbar" class="navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -83,6 +83,9 @@
                 <th>StartTime</th>
               </tr>
             </thead>
+            <tbody>
+            	{{> eventData}}
+            </tbody>
           </table>		 
 		</div>
 		<div id="detailDisplay">  
@@ -109,3 +112,15 @@
 <template name="hello">
   {{greeting}} 
   </template>
+
+<template name="eventData">
+{{#each eventData}}
+	<tr>
+		<td>{{name}}</td>
+		<td>{{venue.latitude}}</td>
+		<td>{{venue.longitude}}</td>
+		<td>{{location}}</td>
+		<td>{{start_time}}</td>
+	</tr>
+{{/each}}
+</template>
