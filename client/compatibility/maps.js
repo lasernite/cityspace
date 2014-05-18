@@ -5,13 +5,13 @@ function load_maps()
 	{
 		if (navigator.geolocation) {
   			var mapOptions = {
-	    		zoom: 4,
+	    		zoom: 13,
 	    		center: new google.maps.LatLng(Session.get("latitude"),Session.get("longitude"))
 	  		};
 		}
 		else {
 			var mapOptions = {
-	    		zoom: 4,
+	    		zoom: 13,
 	    		center: new google.maps.LatLng(-25.363882, 131.044922)
 		  	};
 		}			

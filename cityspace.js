@@ -21,6 +21,7 @@ if (Meteor.isClient) {
   Session.setDefault("city", "");
   Session.setDefault("latitude", 43.600035);
   Session.setDefault("longitude", 1.437836);
+  Session.set("fbeventData",[])
   if (navigator.geolocation) {
   	console.log("..");
   	navigator.geolocation.getCurrentPosition(function (position) {
@@ -44,6 +45,7 @@ if (Meteor.isClient) {
 
   // Load Facebook API with Events
   	load_facebook();
+  //Load GoogleMaps API with Maps
 	load_maps();
 }
 
