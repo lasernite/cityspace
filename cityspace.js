@@ -52,6 +52,8 @@ if (Meteor.isClient) {
 	return fbEventData;
   }
 
+	//Load GooglePlaces API with location
+	load_places();
   // Load Facebook API with Events
   	load_facebook();
   //Load GoogleMaps API with Maps

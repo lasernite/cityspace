@@ -25,6 +25,8 @@ function updateMap(eventData)
 				smallMap.setCenter(marker.getPosition());
 			});
 		}
+
+		google.maps.event.clearListeners(smallMap, 'center_changed');
 		
 		var latlngbounds = new google.maps.LatLngBounds();
 		latlng.forEach(function(n){
@@ -83,7 +85,7 @@ function GMapInitialize()
 	google.maps.event.addListener(smallMap, 'center_changed', function() {
 	// 3 seconds after the center of the map has changed, pan back to the marker.
 		window.setTimeout(function() {
-			map.panTo(marker.getPosition());
+			smallMap.panTo(marker.getPosition());
 		}, 3000);
 	});
 	  
