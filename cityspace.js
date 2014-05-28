@@ -18,18 +18,18 @@ if (Meteor.isClient) {
 		}
 	})(document)
 			
-	Session.setDefault("city", "");
+	Session.setDefault("city", "City");
   	Session.setDefault("latitude", 43.600035);
   	Session.setDefault("longitude", 1.437836);
   	Session.setDefault("fbEventData",[])
   	Session.setDefault("map","noMap");
   	
   	if (navigator.geolocation) {
-  	console.log("..");
+  	console.log("Geo is working");
   	navigator.geolocation.getCurrentPosition(function (position) {
   	  var lat = position.coords.latitude;
   	  var long = position.coords.longitude;
-        Session.set("latitude", lat);
+      Session.set("latitude", lat);
   		Session.set("longitude", long);
   	  //var city = Cities.find().fetch();
   	  var city = Cities.findOne({ geo : { $near : [-long, lat], $maxDistance : 50 } });
@@ -55,7 +55,7 @@ if (Meteor.isClient) {
 	//Load GooglePlaces API with location
 	load_places();
   // Load Facebook API with Events
-  	load_facebook();
+  load_facebook();
   //Load GoogleMaps API with Maps
 	load_maps();
 }

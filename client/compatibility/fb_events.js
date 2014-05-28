@@ -106,7 +106,7 @@ where     \
                 from \
                     place \
                 where \
-                    distance(latitude, longitude, "42.373799", "-71.117070") < 1500 \
+                    distance(latitude, longitude,"' + Session.get("latitude") + '","' + Session.get("longitude") + '") < 3500 \
             ) and \
             start_time > "' + fb_time + '" and start_time < "' + fb_time_future + '" \
     )  and end_time < "2080-1-01" ' 
