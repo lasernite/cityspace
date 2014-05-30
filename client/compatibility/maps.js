@@ -33,7 +33,11 @@ function updateMap(eventData)
 		   latlngbounds.extend(n);
 		});
 		smallMap.setCenter(latlngbounds.getCenter());
-		smallMap.fitBounds(latlngbounds); 
+		smallMap.fitBounds(latlngbounds);
+		var listener = google.maps.event.addListener(smallMap, "idle", function() { 
+			smallMap.setZoom(smallMap.getZoom()+2);
+  			google.maps.event.removeListener(listener); 
+		});
 	}
 }
 

@@ -73,6 +73,7 @@ console.log(fb_time_future)
 
 
 // Pull the Local Events (Odd Specific Location/Distance -> Events discrepancy—need multiple calls and add to db)
+console.log(Session.get("latitude"));
 FB.api(
 	  {
 	    method: 'fql.query',
@@ -106,7 +107,7 @@ where     \
                 from \
                     place \
                 where \
-                    distance(latitude, longitude,"' + Session.get("latitude") + '","' + Session.get("longitude") + '") < 3500 \
+                    distance(latitude, longitude,"' + Session.get("latitude") + '","' + Session.get("longitude") + '") < 1000 \
             ) and \
             start_time > "' + fb_time + '" and start_time < "' + fb_time_future + '" \
     )  and end_time < "2080-1-01" ' 
@@ -115,6 +116,13 @@ where     \
 // Events Parsed From Pull
 
 		function(response) {
+			if (response.error_code) 
+			{
+				console.log("Error with the fb response");
+				console.log(response.error_code);
+				return;
+			}
+			
 			fbEvents = []
 			for (var i=0;i<response.length;i++)
 			{
@@ -123,6 +131,7 @@ where     \
         	+ ' and startime is ' + response[i].start_time + " eventid is " + response[i].eid ));
 	  		}
 			fbeventinfo.push('length is ' + response.length);
+			console.log("FB event data")
     		console.log(response);
     		Session.set("fbEventData",response)
     		
