@@ -39,17 +39,20 @@
 	display: inline;
 	float: left;
 	width: 20%;
-	height: 500px;	
-	background-color:#4ff;
+	height: 500px;
 }
 
 #small_map {
-	position: fixed;
-	height: 70%;
+	position: relative;
+	/*height: 70%;*/
+	height: 0px;
+    padding-bottom: 100%;
 }
 
 #nodeData {
-	height: 30%;	
+	position: relative;
+	height: 30%;
+	bottom: 0;	
 	background-color:#f22;
 }
 
