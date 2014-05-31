@@ -34,6 +34,8 @@ if (Meteor.isClient) {
   	  //var city = Cities.find().fetch();
   	  var city = Cities.findOne({ geo : { $near : [-long, lat], $maxDistance : 50 } });
   	  console.log(city);
+  	  console.log(Session.get("latitude"));
+  	  console.log(Session.get("longitude"));
   	  Session.set("city", city.name);
   	});
   }
@@ -45,10 +47,13 @@ if (Meteor.isClient) {
   
   Template.eventData.eventData = function () {
   	var fbEventData = Session.get("fbEventData");
+<<<<<<< HEAD
     var fbEventUrl = "https://www.facebook.com/events/"
     console.log(fbEventUrl);
   	console.log(fbEventData);
   	
+=======
+>>>>>>> ae1eebf5f4529813111b39c4af101ecbf2999a27
 	updateMap(fbEventData); 
 	
 	return fbEventData;
