@@ -45,6 +45,8 @@ if (Meteor.isClient) {
   
   Template.eventData.eventData = function () {
   	var fbEventData = Session.get("fbEventData");
+    var fbEventUrl = "https://www.facebook.com/events/"
+    console.log(fbEventUrl);
   	console.log(fbEventData);
   	
 	updateMap(fbEventData); 

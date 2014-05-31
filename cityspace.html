@@ -31,7 +31,7 @@
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
           <span class="sr-only">Toggle navigation</span>
         </button>
-        <a class="navbar-brand" href="#">{{>cities}}</a>
+        <a class="navbar-brand" href="#"> {{>cities}} </a>
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
@@ -72,6 +72,7 @@
                 <th>Latitude</th>
                 <th>Longitude</th>
                 <th>StartTime</th>
+                <th>Event ID</th>
               </tr>
             </thead>
             <tbody>
@@ -107,11 +108,12 @@
 <template name="eventData">
 {{#each eventData}}
 	<tr>
-		<td>{{name}}</td>
+		<td><a href={{eid}})> {{name}} </a></td>
 		<td>{{location}}</td>
 		<td>{{venue.latitude}}</td>
 		<td>{{venue.longitude}}</td>
 		<td>{{start_time}}</td>
+    <td>{{eid}}</td>
 	</tr>
 {{/each}}
 </template>
