@@ -108,7 +108,7 @@
 <template name="eventData">
 {{#each eventData}}
 	<tr>
-		<td><a href={{eid}})> {{name}} </a></td>
+		<td><a href={{makeURL eid}}> {{name}} </a></td>
 		<td>{{location}}</td>
 		<td>{{venue.latitude}}</td>
 		<td>{{venue.longitude}}</td>
@@ -116,4 +116,8 @@
     <td>{{eid}}</td>
 	</tr>
 {{/each}}
+</template>
+
+<template name="eventURL">
+  {{makeURL eid}}
 </template>

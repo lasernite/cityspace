@@ -47,20 +47,22 @@ if (Meteor.isClient) {
   
   Template.eventData.eventData = function () {
   	var fbEventData = Session.get("fbEventData");
-    var fbEventUrl = "https://www.facebook.com/events/"
-    console.log(fbEventUrl);
   	console.log(fbEventData);
 	updateMap(fbEventData); 
 	
 	return fbEventData;
   }
 
+  Template.eventData.makeURL = function (eid) {
+    return 'https://www.facebook.com/events/' + eid;
+  }
 	//Load GooglePlaces API with location
 	load_places();
   // Load Facebook API with Events
   load_facebook();
   //Load GoogleMaps API with Maps
 	load_maps();
+
 }
 
 // Meteor Server
