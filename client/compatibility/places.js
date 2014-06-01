@@ -12,9 +12,9 @@ function codeLatLng() {
 	var latlng = new google.maps.LatLng(lat, lng);
   	geocoder.geocode({'latLng': latlng}, function(results, status) {
     	if (status == google.maps.GeocoderStatus.OK) {
-    		console.log(results[1].address_components[1]);
+    		console.log(results);
     		if (results[1]) {
-      			Session.set("city", results[1].address_components[1].long_name);
+      			Session.set("city", results[2].address_components[1].long_name);
       			console.log(Session.get("city"));
       		} else {
         		console.log('No results found');
