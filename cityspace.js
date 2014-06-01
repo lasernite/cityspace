@@ -13,6 +13,7 @@ if (Meteor.isClient) {
 		
 		if (useragent.indexOf('iPhone') != -1 || useragent.indexOf('Android') != -1 ) 
 		{
+			Session.set("mobile",true);
 			$("#small_map").css('width','100%');
 			$("#small_map").css('height','100%');
 		}
@@ -23,8 +24,9 @@ if (Meteor.isClient) {
   	Session.setDefault("longitude", 1.437836);
   	Session.setDefault("fbEventData",[])
   	Session.setDefault("map","noMap");
+  	Session.setDefault("mobile",false);
   	
-  	if (navigator.geolocation) {
+  	/*if (navigator.geolocation) {  	
   	console.log("Geo is working");
   	navigator.geolocation.getCurrentPosition(function (position) {
   	  var lat = position.coords.latitude;
@@ -37,9 +39,13 @@ if (Meteor.isClient) {
   	  console.log(Session.get("latitude"));
   	  console.log(Session.get("longitude"));
   	  Session.set("city", city.name);
-  	});
+  	}
   }
-  
+  else {
+		  	
+  	});
+  	*/	
+  	
   Template.cities.name = function () {
   	var city = Session.get("city");
     return "The" + city + "Space";
@@ -56,11 +62,14 @@ if (Meteor.isClient) {
   Template.eventData.makeURL = function (eid) {
     return 'https://www.facebook.com/events/' + eid;
   }
+  
+	//Use some fancy HTML5 with ip backup to get Lat,Lng data
+  	load_geo();  
 	//Load GooglePlaces API with location
 	load_places();
-  // Load Facebook API with Events
-  load_facebook();
-  //Load GoogleMaps API with Maps
+  	//Load Facebook API with Events
+  	load_facebook();
+  	//Load GoogleMaps API with Maps
 	load_maps();
 
 }
